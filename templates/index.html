@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Aggregator</title>
+    <style>
+        body { font-family: Arial; margin: 2rem; }
+        .article { margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Top News Headlines</h1>
+
+    <form method="POST">
+        <label>Country:
+            <select name="country">
+                <option value="us" {% if selected_country == 'us' %}selected{% endif %}>USA</option>
+                <option value="gb" {% if selected_country == 'gb' %}selected{% endif %}>UK</option>
+                <option value="in" {% if selected_country == 'in' %}selected{% endif %}>India</option>
+            </select>
+        </label>
+        <label>Category:
+            <select name="category">
+                <option value="general" {% if selected_category == 'general' %}selected{% endif %}>General</option>
+                <option value="business" {% if selected_category == 'business' %}selected{% endif %}>Business</option>
+                <option value="technology" {% if selected_category == 'technology' %}selected{% endif %}>Technology</option>
+                <option value="sports" {% if selected_category == 'sports' %}selected{% endif %}>Sports</option>
+            </select>
+        </label>
+        <button type="submit">Get News</button>
+    </form>
+
+    {% for article in articles %}
+        <div class="article">
+            <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+            <p>{{ article.description }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
